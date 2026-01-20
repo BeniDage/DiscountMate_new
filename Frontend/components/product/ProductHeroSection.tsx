@@ -4,50 +4,51 @@ import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import { API_URL } from "@/constants/Api";
 
 interface ProductHeroSectionProps {
-   productId?: string;
+   productId?: string | string[];
    productName?: string;
 }
 
 type ApiProduct = {
    _id: string;
-   product_id?: string | number | null;
    product_name?: string | null;
+   product_code?: string | null;
    link_image?: string | null;
    description?: string | null;
    brand?: string | null;
-   product_code?: string | null;
    current_price?: number | null;
-   item_price?: number | null;
-   unit_price?: number | null;
-   category?: string | null;
+   best_price?: number | null;
+   unit_price?: string | null;
+   best_unit_price?: string | null;
+   is_on_special?: boolean | null;
+   price_date?: string | null;
+   unit_per_prod?: number | null;
+   measurement?: string | null;
+   gtin?: string | null;
 };
 
 export default function ProductHeroSection({
    productId,
-   productName,
 }: ProductHeroSectionProps) {
    const [isFavorited, setIsFavorited] = useState(false);
    const [product, setProduct] = useState<ApiProduct | null>(null);
    const [loading, setLoading] = useState(true);
    const [imageError, setImageError] = useState(false);
 
+   const resolvedProductId = Array.isArray(productId) ? productId[0] : productId;
+
    useEffect(() => {
       const fetchProduct = async () => {
-         if (!productId) {
+         if (!resolvedProductId) {
             setLoading(false);
             return;
          }
 
          try {
             setLoading(true);
-            // The API endpoint is POST /api/products/getproduct with productId in body
-            const response = await fetch(`${API_URL}/products/getproduct`, {
-               method: 'POST',
-               headers: {
-                  'Content-Type': 'application/json',
-               },
-               body: JSON.stringify({ productId: productId }),
-            });
+            // Backend route is GET /api/products/:id
+            const response = await fetch(
+               `${API_URL}/products/${encodeURIComponent(resolvedProductId)}`
+            );
 
             if (response.ok) {
                const data = await response.json();
@@ -59,7 +60,7 @@ export default function ProductHeroSection({
             } else {
                const errorText = await response.text();
                console.error("Failed to fetch product:", response.status, errorText);
-               console.error("ProductId used:", productId);
+               console.error("ProductId used:", resolvedProductId);
             }
          } catch (error) {
             console.error("Error fetching product:", error);
@@ -69,7 +70,15 @@ export default function ProductHeroSection({
       };
 
       fetchProduct();
-   }, [productId]);
+   }, [resolvedProductId]);
+
+   const currentPrice = typeof product?.current_price === "number" ? product.current_price : 0;
+   const oldPrice = typeof product?.best_price === "number" ? product.best_price : 0;
+   const savings = oldPrice > 0 && currentPrice > 0 ? oldPrice - currentPrice : 0;
+   const percent =
+      oldPrice > 0 && currentPrice > 0
+         ? Math.round(((oldPrice - currentPrice) / oldPrice) * 100)
+         : 0;
 
    const displayProduct = {
       name: product?.product_name || "Product",
@@ -79,20 +88,19 @@ export default function ProductHeroSection({
       rating: 4.5,
       reviews: 1247,
       link_image: product?.link_image || null,
-      price: product?.current_price || 0,
-      oldPrice: product?.item_price || product?.best_price || 0,
+      price: currentPrice,
+      oldPrice,
       retailer: "Coles",
-      savings: (product?.item_price || product?.best_price) && product?.current_price
-         ? (product.item_price || product.best_price) - product.current_price
-         : 0,
-      percent: (product?.item_price || product?.best_price) && product?.current_price
-         ? Math.round((((product.item_price || product.best_price) - product.current_price) / (product.item_price || product.best_price)) * 100)
-         : 0,
+      savings,
+      percent,
       trend: "down",
-      size: "Standard",
-      unitPrice: product?.unit_price || product?.best_unit_price || 0,
+      size:
+         product?.unit_per_prod && product?.measurement
+            ? `${product.unit_per_prod}${product.measurement}`
+            : "Standard",
+      unitPriceLabel: product?.unit_price || product?.best_unit_price || null,
       availability: "Available for delivery & pickup",
-      updated: "2 hours ago",
+      updated: product?.price_date ? String(product.price_date) : "recently",
    };
 
    if (loading) {
@@ -224,11 +232,11 @@ export default function ProductHeroSection({
                      <Text className="text-gray-700">Size: {displayProduct.size}</Text>
                   </View>
 
-                  {displayProduct.unitPrice > 0 && (
+                  {!!displayProduct.unitPriceLabel && (
                      <View className="flex-row gap-2 items-center">
                         <FontAwesome6 name="money-bill" size={16} color="#4B5563" />
                         <Text className="text-gray-700">
-                           Unit Price: ${displayProduct.unitPrice.toFixed(2)}/unit
+                           Unit Price: {displayProduct.unitPriceLabel}
                         </Text>
                      </View>
                   )}

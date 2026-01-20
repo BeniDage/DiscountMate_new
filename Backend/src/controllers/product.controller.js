@@ -15,13 +15,6 @@ function normaliseColesProduct(product, latestPricing = null) {
     // Preserve Mongo _id so existing keyExtractor `_id` still works.
     _id: product._id,
 
-    // ID used elsewhere in the app (e.g. basket, search)
-    product_id:
-      product.product_id ??
-      product.productId ??
-      product.product_code ??
-      null,
-
     // Name/title for display
     product_name:
       product.product_name ??
@@ -29,22 +22,44 @@ function normaliseColesProduct(product, latestPricing = null) {
       product.item_name ??
       'Unnamed Product',
 
+    // Stable join key for pricing + external references
+    product_code: product.product_code ?? null,
+
+    // Brand / barcode (exists in your products collection)
+    brand: product.brand ?? null,
+    gtin: product.gtin ?? null,
+
+    // Pack size (exists in your products collection)
+    unit_per_prod: product.unit_per_prod ?? null,
+    measurement: product.measurement ?? null,
+
+    // Category reference (exists in your products collection)
+    category_id: product.category_id ?? null,
+
     // Description
     description: product.description ?? null,
 
-    // Reuse `link_image`/`image` if present; otherwise fall back to product page `link` or null.
+    // Product image URL
     link_image:
       product.link_image ??
       product.image ??
-      product.link ??
       null,
 
     // Price used throughout the UI - from product_pricings only, or 0 if no pricing exists
     current_price: currentPrice,
 
-    // Extra fields that may be useful to callers
-    category: product.category ?? null,
-    link: product.link ?? null,
+    // Latest pricing metadata (exists in product_pricings collection)
+    store_chain: latestPricing?.store_chain ?? null,
+    price_date: latestPricing?.date ?? null,
+    best_price: latestPricing?.best_price ?? null,
+    unit_price: latestPricing?.unit_price ?? null,
+    best_unit_price: latestPricing?.best_unit_price ?? null,
+    is_on_special: latestPricing?.is_on_special ?? null,
+
+    // Timestamps (exists in your products + pricing collections)
+    created_at: product.created_at ?? null,
+    updated_at: product.updated_at ?? null,
+    pricing_created_at: latestPricing?.created_at ?? null,
   };
 }
 
