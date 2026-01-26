@@ -49,6 +49,10 @@ function normaliseColesProduct(product, latestPricing = null) {
       product.image ??
       null,
 
+    // Additional product image URLs (optional)
+    image_link_back: product.image_link_back ?? null,
+    image_link_side: product.image_link_side ?? null,
+
     // Price used throughout the UI - from product_pricings only, or 0 if no pricing exists
     current_price: currentPrice,
 
@@ -60,7 +64,7 @@ function normaliseColesProduct(product, latestPricing = null) {
     best_unit_price: latestPricing?.best_unit_price ?? null,
     is_on_special: latestPricing?.is_on_special ?? null,
 
-    // Timestamps (exists in your products + pricing collections)
+    // Timestamps
     created_at: product.created_at ?? null,
     updated_at: product.updated_at ?? null,
     pricing_created_at: latestPricing?.created_at ?? null,
@@ -69,7 +73,7 @@ function normaliseColesProduct(product, latestPricing = null) {
 
 const getProducts = async (req, res) => {
    try {
-      const db = getDb(); // uses the Mongo connection created during startServer()
+      const db = getDb();
       const coles = db.collection("products");
 
       const { search, category } = req.query || {};
@@ -213,7 +217,7 @@ const getProduct = async (req, res) => {
       const productsCol = db.collection("products");
       const pricingsCol = db.collection("product_pricings");
 
-      // Support id coming from params, query, or body (because humans love inconsistency)
+      // Support id coming from params, query, or body
       const identifier =
          req.params?.id ??
          req.query?.productId ??
@@ -243,7 +247,7 @@ const getProduct = async (req, res) => {
          product = await productsCol.findOne({ product_code: idStr });
       }
 
-      // 4) Try product_code as numeric match (if applicable)
+      // 4) Try product_code as numeric match
       if (!product) {
          const numId = Number(idStr);
          if (!Number.isNaN(numId)) {
