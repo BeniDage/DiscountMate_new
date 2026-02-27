@@ -26,7 +26,7 @@ const FeatureList = [
   },
   {
     title: 'DataBytes Structure',
-    imgSrc: require('@site/static/img/databytes.png').default,
+    imgSrc: require('@site/static/img/databytes.PNG').default,
     description: (
       <>
         DiscountMate operates within DataBytes, a multidisciplinary capstone technology organisation at Deakin University. 
