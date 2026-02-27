@@ -11,7 +11,7 @@ const config = {
   url: "https://benidage.github.io",
 
   // The PATH of your site (Usually matches your repo name)
-  baseUrl: "/DiscountMate_new/",
+  baseUrl: "/docs-site/build/index.html",
 
   // GitHub pages deployment config.
   organizationName: "BeniDage", // Your GitHub org name
@@ -86,7 +86,7 @@ const config = {
             items: [
               {
                 label: "Main Repository",
-                href: "https://github.com/BeniDage/DiscountMate_new",
+                href: "https://github.com/BeniDage/DiscountMate_new/",
               },
             ],
           },
