@@ -52,7 +52,7 @@ const config = {
         title: 'DiscountMate',
         logo: {
           alt: 'DiscountMate Logo',
-          src: 'img/databytes.png', // Ensure you have a logo.svg in static/img/
+          src: 'img/databytes.PNG', // Ensure you have a logo.svg in static/img/
         },
         items: [
           {
