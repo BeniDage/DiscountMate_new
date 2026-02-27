@@ -7,15 +7,12 @@ const config = {
   tagline: "Smart Price Scraping & ML Predictions",
   favicon: "img/discountmatemain.PNG",
 
-  // The LIVE URL of your site (Notice the .io format)
   url: "https://benidage.github.io",
+  baseUrl: "/DiscountMate_new/",
 
-  // The PATH of your site (Usually matches your repo name)
-  baseUrl: "/DiscountMate_new/docs-site/build/index.html",
-
-  // GitHub pages deployment config.
-  organizationName: "BeniDage", // Your GitHub org name
-  projectName: "DiscountMate_new", // Your repo name
+  organizationName: "BeniDage",
+  projectName: "DiscountMate_new",
+  deploymentBranch: "gh-pages",
   trailingSlash: false,
 
   onBrokenLinks: "throw",
@@ -29,19 +26,17 @@ const config = {
   presets: [
     [
       "classic",
-      /** @type {import('@docusaurus/preset-classic').Options} */
-      ({
+      {
         docs: {
           sidebarPath: "./sidebars.js",
-          // Set this to your specific project's doc folder
           editUrl:
-            "https://github.com/BeniDage/DiscountMate_new/tree/main/docs-site/build/index.html/docs",
+            "https://github.com/BeniDage/DiscountMate_new/tree/main/docs-site/",
         },
-        blog: false, // Turned off to match the Redback documentation style
+        blog: false,
         theme: {
           customCss: "./src/css/custom.css",
         },
-      }),
+      },
     ],
   ],
 
