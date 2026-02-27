@@ -1,44 +1,45 @@
 // @ts-check
-import {themes as prismThemes} from 'prism-react-renderer';
+import { themes as prismThemes } from "prism-react-renderer";
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'DiscountMate Docs',
-  tagline: 'Smart Price Scraping & ML Predictions',
-  favicon: 'img/discountmatemain.PNG',
+  title: "DiscountMate Docs",
+  tagline: "Smart Price Scraping & ML Predictions",
+  favicon: "img/discountmatemain.PNG",
 
   // The LIVE URL of your site (Notice the .io format)
-  url: 'https://DataBytes-Organisation.github.io',
-  
+  url: "https://BeniDage.github.io",
+
   // The PATH of your site (Usually matches your repo name)
-  baseUrl: '/DiscountMate_new/',
+  baseUrl: "/DiscountMate_new/",
 
   // GitHub pages deployment config.
-  organizationName: 'DataBytes-Organisation', // Your GitHub org name
-  projectName: 'DiscountMate_new',           // Your repo name
+  organizationName: "BeniDage", // Your GitHub org name
+  projectName: "DiscountMate_new", // Your repo name
   trailingSlash: false,
 
-  onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenLinks: "throw",
+  onBrokenMarkdownLinks: "warn",
 
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: "en",
+    locales: ["en"],
   },
 
   presets: [
     [
-      'classic',
+      "classic",
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          sidebarPath: './sidebars.js',
+          sidebarPath: "./sidebars.js",
           // Set this to your specific project's doc folder
-          editUrl: 'https://github.com/DataBytes-Organisation/DiscountMate_new/tree/main/docs-site/',
+          editUrl:
+            "https://github.com/BeniDage/DiscountMate_new/tree/main/docs-site/",
         },
         blog: false, // Turned off to match the Redback documentation style
         theme: {
-          customCss: './src/css/custom.css',
+          customCss: "./src/css/custom.css",
         },
       }),
     ],
@@ -47,45 +48,45 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      image: 'img/docusaurus-social-card.jpg',
+      image: "img/docusaurus-social-card.jpg",
       navbar: {
-        title: 'DiscountMate',
+        title: "DiscountMate",
         logo: {
-          alt: 'DiscountMate Logo',
-          src: 'img/databytes.PNG', // Ensure you have a logo.svg in static/img/
+          alt: "DiscountMate Logo",
+          src: "img/databytes.PNG", // Ensure you have a logo.svg in static/img/
         },
         items: [
           {
-            type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
-            position: 'left',
-            label: 'Documentation',
+            type: "docSidebar",
+            sidebarId: "tutorialSidebar",
+            position: "left",
+            label: "Documentation",
           },
           {
-            href: 'https://github.com/DataBytes-Organisation/DiscountMate_new',
-            label: 'GitHub',
-            position: 'right',
+            href: "https://github.com/BeniDage/DiscountMate_new",
+            label: "GitHub",
+            position: "right",
           },
         ],
       },
       footer: {
-        style: 'dark',
+        style: "dark",
         links: [
           {
-            title: 'Docs',
+            title: "Docs",
             items: [
               {
-                label: 'Introduction',
-                to: '/docs/',
+                label: "Introduction",
+                to: "/docs/",
               },
             ],
           },
           {
-            title: 'Project Links',
+            title: "Project Links",
             items: [
               {
-                label: 'Main Repository',
-                href: 'https://github.com/DataBytes-Organisation/DiscountMate_new',
+                label: "Main Repository",
+                href: "https://github.com/BeniDage/DiscountMate_new",
               },
             ],
           },
