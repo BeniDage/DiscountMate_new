@@ -8,10 +8,10 @@ const config = {
   favicon: "img/discountmatemain.PNG",
 
   // The LIVE URL of your site (Notice the .io format)
-  url: "https://benidage.github.io/DiscountMate_new",
+  url: "https://benidage.github.io",
 
   // The PATH of your site (Usually matches your repo name)
-  baseUrl: "/docs-site/build/index.html",
+  baseUrl: "/DiscountMate_new/docs-site/build/index.html",
 
   // GitHub pages deployment config.
   organizationName: "BeniDage", // Your GitHub org name
@@ -35,7 +35,7 @@ const config = {
           sidebarPath: "./sidebars.js",
           // Set this to your specific project's doc folder
           editUrl:
-            "https://github.com/BeniDage/DiscountMate_new/tree/main/docs-site/",
+            "https://github.com/BeniDage/DiscountMate_new/tree/main/docs-site/build/index.html/docs",
         },
         blog: false, // Turned off to match the Redback documentation style
         theme: {
