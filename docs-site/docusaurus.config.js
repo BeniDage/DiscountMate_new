@@ -8,7 +8,7 @@ const config = {
   favicon: "img/discountmatemain.PNG",
 
   // The LIVE URL of your site (Notice the .io format)
-  url: "https://benidage.github.io",
+  url: "https://benidage.github.io/DiscountMate_new",
 
   // The PATH of your site (Usually matches your repo name)
   baseUrl: "/docs-site/build/index.html",
